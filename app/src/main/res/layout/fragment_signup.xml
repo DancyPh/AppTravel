@@ -8,7 +8,7 @@
 
     <!-- TODO: Update blank fragment layout -->
     <EditText
-        android:id="@+id/txtUsernameSignup_customer"
+        android:id="@+id/edtUsernameSignup_customer"
         android:layout_width="306dp"
         android:layout_height="wrap_content"
         android:hint="Username"
@@ -20,7 +20,7 @@
         app:layout_constraintVertical_bias="0.156" />
 
     <EditText
-        android:id="@+id/txtPasswordSignup_customer"
+        android:id="@+id/edtPasswordSignup_customer"
         android:layout_width="306dp"
         android:layout_height="wrap_content"
         android:hint="Passwornd"
@@ -28,11 +28,11 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.497"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/txtUsernameSignup_customer"
+        app:layout_constraintTop_toBottomOf="@id/edtUsernameSignup_customer"
         app:layout_constraintVertical_bias="0" />
 
     <EditText
-        android:id="@+id/txtConfirmSignup_customer"
+        android:id="@+id/edtConfirmSignup_customer"
         android:layout_width="306dp"
         android:layout_height="wrap_content"
         android:hint="Confirm Passwornd"
@@ -40,23 +40,11 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.497"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/txtPasswordSignup_customer"
+        app:layout_constraintTop_toBottomOf="@id/edtPasswordSignup_customer"
         app:layout_constraintVertical_bias="0" />
-
-    <EditText
-        android:id="@+id/txtNameSignup_customer"
-        android:layout_width="306dp"
-        android:layout_height="wrap_content"
-        android:hint="Name"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.497"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/txtConfirmSignup_customer"
-        app:layout_constraintVertical_bias="0" />
-
 
     <Button
+        android:id="@+id/btnSignup_customer"
         android:layout_width="306dp"
         android:layout_height="wrap_content"
         android:text="Sign up"
@@ -64,6 +52,6 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.504"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/txtPasswordSignup_customer"
+        app:layout_constraintTop_toBottomOf="@id/edtPasswordSignup_customer"
         app:layout_constraintVertical_bias="0.262" />
 </androidx.constraintlayout.widget.ConstraintLayout>

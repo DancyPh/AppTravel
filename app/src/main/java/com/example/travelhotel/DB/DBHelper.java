@@ -3,12 +3,13 @@ package com.example.travelhotel.DB;
 import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
+import android.database.SQLException;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 
 public class DBHelper extends SQLiteOpenHelper {
 
-    public static final String DBNAME = "Hotels.db";
+    public static final String DBNAME = "Bookings.db";
 
     public DBHelper(Context context){
         super(context, DBNAME , null, 1);
@@ -19,7 +20,7 @@ public class DBHelper extends SQLiteOpenHelper {
         // customers
         String createCustomersTable = "create Table customers(id_customer integer primary key autoincrement," +
                 "username_customer text," +
-                "password_custommer text," +
+                "password_customer text," +
                 "name_customer text," +
                 "phone_customer text," +
                 "address_customer text)";
@@ -29,7 +30,7 @@ public class DBHelper extends SQLiteOpenHelper {
         String createHotelsTable = "create table hotels(id_hotel integer primary key autoincrement," +
                 "username_hotel text," +
                 "password_hotel text," +
-                "name_hotel" +
+                "name_hotel," +
                 "phone_hotel text," +
                 "address_hotel text)";
         db.execSQL(createHotelsTable);
@@ -49,38 +50,44 @@ public class DBHelper extends SQLiteOpenHelper {
 
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
-        db.execSQL("drop table if exists customers");
-        db.execSQL("drop table if exists hotels");
-        db.execSQL("drop table if exists bookings");
+        // Xóa bảng cũ nếu tồn tại
+        db.execSQL("DROP TABLE IF EXISTS customers");
+        db.execSQL("DROP TABLE IF EXISTS hotels");
+        db.execSQL("DROP TABLE IF EXISTS bookings");
 
+        // Tạo lại các bảng với cấu trúc mới
         onCreate(db);
     }
 
-    public boolean checkInserCustomer(String username, String password, String name, String phone, String address){
-        SQLiteDatabase db = this.getReadableDatabase();
-        ContentValues contentValues = new ContentValues();
-        contentValues.put("username_customer", username);
-        contentValues.put("password_customer", password);
-        contentValues.put("name_customer", name);
-        contentValues.put("phone_customer", phone);
-        contentValues.put("address_customer", address);
-        long result = db.insert("customers", null, contentValues);
 
-        return result != -1;
+    public boolean checkInserCustomer(String username, String password) {
+        SQLiteDatabase db = this.getWritableDatabase();
+        try {
+            ContentValues contentValues = new ContentValues();
+            contentValues.put("username_customer", username);
+            contentValues.put("password_customer", password);
 
+            long result = db.insert("customers", null, contentValues);
+            return (result != -1);
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return false;
+        } finally {
+            db.close();
+        }
     }
 
-    public boolean checkInserHotel(String username, String password, String name, String phone, String address){
+
+    public boolean checkInserHotel(String username, String password){
         SQLiteDatabase db = this.getReadableDatabase();
         ContentValues contentValues = new ContentValues();
         contentValues.put("username_hotel", username);
         contentValues.put("password_hotel", password);
-        contentValues.put("name_hotel", name);
-        contentValues.put("phone_hotel", phone);
-        contentValues.put("address_hotel", address);
         long result = db.insert("hotels", null, contentValues);
-
-        return  result != -1;
+        if (result == -1){
+            return false;
+        }
+        return true;
 
     }
 
@@ -99,7 +106,10 @@ public class DBHelper extends SQLiteOpenHelper {
 
         long result = db.insert("bookings", null, contentValues);
 
-        return result != -1;
+        if (result == -1){
+            return false;
+        }
+        return true;
     }
 
     // check usrename
@@ -109,9 +119,9 @@ public class DBHelper extends SQLiteOpenHelper {
         Cursor cursorCustomer = db.rawQuery("select * from customers where username_customer = ?", new String[]{username});
         Cursor cursorHotel = db.rawQuery("select * from hotels where username_hotel = ?", new String[]{username});
         if(cursorCustomer.getCount() > 0 || cursorHotel.getCount() > 0)
-            return true;
-        else
             return false;
+        else
+            return true;
 
     }
 

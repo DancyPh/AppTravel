@@ -1,11 +1,19 @@
 package com.example.travelhotel;
 
+import android.content.Intent;
 import android.os.Bundle;
+import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
+import android.widget.EditText;
+import android.widget.Toast;
 
 import androidx.fragment.app.Fragment;
+
+import com.example.travelhotel.Customer.CustomerLogin;
+import com.example.travelhotel.DB.DBHelper;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -23,6 +31,8 @@ public class SignupFragment extends Fragment {
     private String mParam1;
     private String mParam2;
 
+    private EditText edtusernamesignup_customer, edtpasswordsignup_customer, edtconfirmsignup_customer;
+    private Button btnsignup_customer;
     public SignupFragment() {
         // Required empty public constructor
     }
@@ -58,6 +68,41 @@ public class SignupFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_signup, container, false);
+        View view = inflater.inflate(R.layout.fragment_signup, container, false);
+
+        // anh xa
+        edtusernamesignup_customer = view.findViewById(R.id.edtUsernameSignup_customer);
+        edtpasswordsignup_customer = view.findViewById(R.id.edtPasswordSignup_customer);
+        edtconfirmsignup_customer = view.findViewById(R.id.edtConfirmSignup_customer);
+        btnsignup_customer = view.findViewById(R.id.btnSignup_customer);
+
+        btnsignup_customer.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                String user = edtusernamesignup_customer.getText().toString();
+                String pass = edtpasswordsignup_customer.getText().toString();
+                String confirm = edtconfirmsignup_customer.getText().toString();
+
+                if (TextUtils.isEmpty(user) || TextUtils.isEmpty(pass) || TextUtils.isEmpty(confirm)) {
+                    Toast.makeText(getActivity(), "Please fill in all fields", Toast.LENGTH_SHORT).show();
+                } else if (!pass.equals(confirm)) {
+                    Toast.makeText(getActivity(), "Passwords do not match", Toast.LENGTH_SHORT).show();
+                } else {
+                    DBHelper dbHelper = new DBHelper(getActivity());
+                    if (dbHelper.checkInserCustomer(user, pass)){
+                        Toast.makeText(getActivity(), "Success", Toast.LENGTH_SHORT).show();
+                        Intent intent = new Intent(getActivity(), CustomerLogin.class);
+                        startActivity(intent);
+                    }else {
+                        Toast.makeText(getActivity(), "Fail", Toast.LENGTH_SHORT).show();
+                    }
+
+                }
+
+            }
+        });
+        return  view;
     }
+
+
 }
