@@ -90,7 +90,6 @@ public class SignupFragment extends Fragment {
                 } else {
                     DBHelper dbHelper = new DBHelper(getActivity());
                     if (dbHelper.checkInserCustomer(user, pass)){
-                        Toast.makeText(getActivity(), "Success", Toast.LENGTH_SHORT).show();
                         Intent intent = new Intent(getActivity(), CustomerLogin.class);
                         startActivity(intent);
                     }else {

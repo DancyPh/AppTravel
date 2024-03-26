@@ -82,7 +82,6 @@ public class LoginFragment extends Fragment {
                 SQLiteDatabase db = dbHelper.getReadableDatabase();
 
                 if(dbHelper.checkLogin(user, pass)){
-                    Toast.makeText(getActivity(), "Success", Toast.LENGTH_SHORT).show();
                     Intent intent = new Intent(getActivity(), CustomerHome.class);
                     startActivity(intent);
                 }else {

@@ -1,8 +1,8 @@
 package com.example.travelhotel.Customer;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.MenuItem;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBarDrawerToggle;
@@ -52,7 +52,8 @@ public class CustomerHome extends AppCompatActivity implements NavigationView.On
         } else if (id == R.id.nav_about) {
             getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, new AboutFragment()).commit();
         } else if (id == R.id.nav_logout) {
-            Toast.makeText(this, "Logout!", Toast.LENGTH_SHORT).show();
+            Intent intentlogout = new Intent(CustomerHome.this, CustomerLogin.class);
+            startActivity(intentlogout);
         }
         drawerLayout.closeDrawer(GravityCompat.START);
         return true;

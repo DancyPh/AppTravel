@@ -135,4 +135,51 @@ public class DBHelper extends SQLiteOpenHelper {
         else return false;
     }
 
+    // get customer
+    public Customers getCustomer(String user, String pass){
+        SQLiteDatabase db = this.getReadableDatabase();
+        Customers customer = null;
+        Cursor cursor = db.query("customers", new String[]{"username_customer", "password_customer", "name_customer", "phone_customer", "address_customer"},
+                "username_customer = ? and password_customer = ?",new String[]{user, pass}, null, null, null);
+        if (cursor != null && cursor.moveToFirst()){
+            int nameIndex = cursor.getColumnIndex("name_customer");
+            int phoneIndex = cursor.getColumnIndex("phone_customer");
+            int addressIndex = cursor.getColumnIndex("address_customer");
+
+            if (nameIndex != -1 && phoneIndex != -1 && addressIndex != -1) {
+                String name = cursor.getString(nameIndex);
+                String phone = cursor.getString(phoneIndex);
+                String address = cursor.getString(addressIndex);
+
+                customer = new Customers(user, pass, name, phone, address);
+            }
+
+            cursor.close();
+        }
+        return customer;
+    }
+
+
+    // get hotel
+    public Hotels getHotel(String user, String pass){
+        SQLiteDatabase db = this.getReadableDatabase();
+        Hotels hotel = null;
+        Cursor cursor = db.query("hotels", new String[]{"username_hotel", "password_hotel", "name_hotel", "phone_hotel", "address_hotel"},
+                "username_hotel = ? and password_hotel = ?", new String[]{user, pass}, null, null, null);
+        if (cursor != null & cursor.moveToFirst()){
+            int nameIndex = cursor.getColumnIndex("name_hotel");
+            int phoneIndex = cursor.getColumnIndex("phone_hotel");
+            int addressIndex = cursor.getColumnIndex("address_hotel");
+
+            if (nameIndex != -1 && phoneIndex != -1 && addressIndex != -1){
+                String name = cursor.getString(nameIndex);
+                String phone = cursor.getString(phoneIndex);
+                String address = cursor.getString(addressIndex);
+
+                hotel = new Hotels(user, pass, name, phone, address);
+            }
+            cursor.close();
+        }
+        return hotel;
+    }
 }
