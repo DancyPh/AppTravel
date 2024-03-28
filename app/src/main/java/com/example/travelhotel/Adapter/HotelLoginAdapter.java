@@ -1,30 +1,28 @@
 package com.example.travelhotel.Adapter;
 
 import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentStatePagerAdapter;
 
-import com.example.travelhotel.Customer.LoginFragment;
-import com.example.travelhotel.Customer.SignupFragment;
+import com.example.travelhotel.Hotel.HotelLoginFragment;
+import com.example.travelhotel.Hotel.HotelSignupFragment;
 
-public class LoginAdapter extends FragmentStatePagerAdapter {
-
-    public LoginAdapter(@NonNull FragmentManager fm, int behavior) {
+public class HotelLoginAdapter extends FragmentStatePagerAdapter {
+    public HotelLoginAdapter(FragmentManager fm, int behavior){
         super(fm, behavior);
     }
 
     @NonNull
     @Override
-    public Fragment getItem(int position) {
-        switch (position){
+    public Fragment getItem(int positon){
+        switch (positon){
             case 0:
-                return new LoginFragment();
+                return new HotelLoginFragment();
             case 1:
-                return new SignupFragment();
+                return new HotelSignupFragment();
             default:
-                return new LoginFragment();
+                return new HotelLoginFragment();
         }
     }
 
@@ -33,7 +31,7 @@ public class LoginAdapter extends FragmentStatePagerAdapter {
         return 2;
     }
 
-    @Nullable
+    @NonNull
     @Override
     public CharSequence getPageTitle(int position) {
         String title = "";

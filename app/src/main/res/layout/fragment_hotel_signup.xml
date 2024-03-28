@@ -4,11 +4,11 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".Customer.LoginFragment">
+    tools:context=".Hotel.HotelLogin">
 
     <!-- TODO: Update blank fragment layout -->
     <EditText
-        android:id="@+id/edtUsernameLogin_customer"
+        android:id="@+id/edtUsernameSignup_hotel"
         android:layout_width="306dp"
         android:layout_height="wrap_content"
         android:hint="Username"
@@ -20,7 +20,7 @@
         app:layout_constraintVertical_bias="0.156" />
 
     <EditText
-        android:id="@+id/edtPasswordLogin_customer"
+        android:id="@+id/edtPasswordSignup_hotel"
         android:layout_width="306dp"
         android:layout_height="wrap_content"
         android:hint="Passwornd"
@@ -28,29 +28,30 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.497"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/edtUsernameLogin_customer"
+        app:layout_constraintTop_toBottomOf="@id/edtUsernameSignup_hotel"
         app:layout_constraintVertical_bias="0" />
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Forgot Password"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.823"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/edtPasswordLogin_customer"
-        app:layout_constraintVertical_bias="0"/>
-
-    <Button
-        android:id="@+id/btnLogin_customer"
+    <EditText
+        android:id="@+id/edtConfirmSignup_hotel"
         android:layout_width="306dp"
         android:layout_height="wrap_content"
-        android:text="Login"
+        android:hint="Confirm Passwornd"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.497"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/edtPasswordSignup_hotel"
+        app:layout_constraintVertical_bias="0" />
+
+    <Button
+        android:id="@+id/btnSignup_hotel"
+        android:layout_width="306dp"
+        android:layout_height="wrap_content"
+        android:text="Sign up"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.504"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/edtPasswordLogin_customer"
+        app:layout_constraintTop_toBottomOf="@id/edtPasswordSignup_hotel"
         app:layout_constraintVertical_bias="0.262" />
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -1,8 +1,7 @@
-package com.example.travelhotel;
+package com.example.travelhotel.Hotel;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -12,15 +11,15 @@ import android.widget.Toast;
 
 import androidx.fragment.app.Fragment;
 
-import com.example.travelhotel.Customer.CustomerLogin;
 import com.example.travelhotel.DB.DBHelper;
+import com.example.travelhotel.R;
 
 /**
  * A simple {@link Fragment} subclass.
- * Use the {@link SignupFragment#newInstance} factory method to
+ * Use the {@link HotelSignupFragment#newInstance} factory method to
  * create an instance of this fragment.
  */
-public class SignupFragment extends Fragment {
+public class HotelSignupFragment extends Fragment {
 
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -31,9 +30,11 @@ public class SignupFragment extends Fragment {
     private String mParam1;
     private String mParam2;
 
-    private EditText edtusernamesignup_customer, edtpasswordsignup_customer, edtconfirmsignup_customer;
-    private Button btnsignup_customer;
-    public SignupFragment() {
+    private EditText edtusernamesignup_hotel, edtpasswordsignup_hotel, edtconfirmsignup_hotel;
+    private Button btnsignup_hotel;
+    private View view;
+
+    public HotelSignupFragment() {
         // Required empty public constructor
     }
 
@@ -43,11 +44,11 @@ public class SignupFragment extends Fragment {
      *
      * @param param1 Parameter 1.
      * @param param2 Parameter 2.
-     * @return A new instance of fragment SignupFragment.
+     * @return A new instance of fragment HotelSignupFragment.
      */
     // TODO: Rename and change types and number of parameters
-    public static SignupFragment newInstance(String param1, String param2) {
-        SignupFragment fragment = new SignupFragment();
+    public static HotelSignupFragment newInstance(String param1, String param2) {
+        HotelSignupFragment fragment = new HotelSignupFragment();
         Bundle args = new Bundle();
         args.putString(ARG_PARAM1, param1);
         args.putString(ARG_PARAM2, param2);
@@ -68,40 +69,37 @@ public class SignupFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        View view = inflater.inflate(R.layout.fragment_signup, container, false);
+        view = inflater.inflate(R.layout.fragment_hotel_signup, container, false);
 
-        // anh xa
-        edtusernamesignup_customer = view.findViewById(R.id.edtUsernameSignup_customer);
-        edtpasswordsignup_customer = view.findViewById(R.id.edtPasswordSignup_customer);
-        edtconfirmsignup_customer = view.findViewById(R.id.edtConfirmSignup_customer);
-        btnsignup_customer = view.findViewById(R.id.btnSignup_customer);
+        edtusernamesignup_hotel = view.findViewById(R.id.edtUsernameSignup_hotel);
+        edtpasswordsignup_hotel = view.findViewById(R.id.edtPasswordSignup_hotel);
+        edtconfirmsignup_hotel = view.findViewById(R.id.edtConfirmSignup_hotel);
+        btnsignup_hotel = view.findViewById(R.id.btnSignup_hotel);
 
-        btnsignup_customer.setOnClickListener(new View.OnClickListener() {
+        btnsignup_hotel.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                String user = edtusernamesignup_customer.getText().toString();
-                String pass = edtpasswordsignup_customer.getText().toString();
-                String confirm = edtconfirmsignup_customer.getText().toString();
+                String user = edtusernamesignup_hotel.getText().toString();
+                String pass = edtpasswordsignup_hotel.getText().toString();
+                String confirm = edtconfirmsignup_hotel.getText().toString();
 
-                if (TextUtils.isEmpty(user) || TextUtils.isEmpty(pass) || TextUtils.isEmpty(confirm)) {
-                    Toast.makeText(getActivity(), "Please fill in all fields", Toast.LENGTH_SHORT).show();
-                } else if (!pass.equals(confirm)) {
-                    Toast.makeText(getActivity(), "Passwords do not match", Toast.LENGTH_SHORT).show();
+                if (user.isEmpty() || pass.isEmpty() || confirm.isEmpty()){
+                    Toast.makeText(getActivity(), "Not null", Toast.LENGTH_SHORT).show();
+                } else if (!user.equals(confirm)) {
+                    Toast.makeText(getActivity(), "Password and Confirm password not equals", Toast.LENGTH_SHORT).show();
                 } else {
                     DBHelper dbHelper = new DBHelper(getActivity());
-                    if (dbHelper.checkInserCustomer(user, pass)){
-                        Intent intent = new Intent(getActivity(), CustomerLogin.class);
+                    if (dbHelper.checkInserHotel(user, pass)){
+                        Intent intent = new Intent(getActivity(), HotelLogin.class);
                         startActivity(intent);
                     }else {
                         Toast.makeText(getActivity(), "Fail", Toast.LENGTH_SHORT).show();
                     }
-
                 }
-
             }
         });
-        return  view;
+
+
+        return view;
     }
-
-
 }

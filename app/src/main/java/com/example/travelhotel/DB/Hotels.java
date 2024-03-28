@@ -1,13 +1,17 @@
 package com.example.travelhotel.DB;
 
 public class Hotels {
+
+
+    private int id_hotel;
     private String username_hotel;
     private String password_hotel;
     private String name_hotel;
     private String phone_hotel;
     private String address_hotel;
 
-    public Hotels(String username_hotel, String password_hotel, String name_hotel, String phone_hotel, String address_hotel) {
+    public Hotels(int id_hotel, String username_hotel, String password_hotel, String name_hotel, String phone_hotel, String address_hotel) {
+        this.id_hotel = id_hotel;
         this.username_hotel = username_hotel;
         this.password_hotel = password_hotel;
         this.name_hotel = name_hotel;
@@ -15,6 +19,13 @@ public class Hotels {
         this.address_hotel = address_hotel;
     }
 
+    public int getId_hotel() {
+        return id_hotel;
+    }
+
+    public void setId_hotel(int id_hotel) {
+        this.id_hotel = id_hotel;
+    }
     public String getUsername_hotel() {
         return username_hotel;
     }

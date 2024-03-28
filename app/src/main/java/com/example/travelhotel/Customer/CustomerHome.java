@@ -11,11 +11,7 @@ import androidx.appcompat.widget.Toolbar;
 import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
 
-import com.example.travelhotel.AboutFragment;
-import com.example.travelhotel.HomeTabFragment;
 import com.example.travelhotel.R;
-import com.example.travelhotel.SettingsFragment;
-import com.example.travelhotel.ShareFragment;
 import com.google.android.material.navigation.NavigationView;
 
 public class CustomerHome extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {

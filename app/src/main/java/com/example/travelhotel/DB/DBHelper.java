@@ -35,6 +35,15 @@ public class DBHelper extends SQLiteOpenHelper {
                 "address_hotel text)";
         db.execSQL(createHotelsTable);
 
+        // rooms
+        String createRoomsTable = "create table rooms(id_room integer primary key autoincrement," +
+                "room_name text," +
+                "room_price money," +
+                "room_number int," +
+                "room_status bit," +
+                "foreign key (id_hotel) references hotel (id_hotel))";
+        db.execSQL(createRoomsTable);
+
         //bookings
         String creatBookingsTable = "create table bookings(id_booking integer primary key autoincrement," +
                 "id_customer integer," +
@@ -54,6 +63,7 @@ public class DBHelper extends SQLiteOpenHelper {
         db.execSQL("DROP TABLE IF EXISTS customers");
         db.execSQL("DROP TABLE IF EXISTS hotels");
         db.execSQL("DROP TABLE IF EXISTS bookings");
+        db.execSQL("DROP TABLE IF EXISTS rooms");
 
         // Tạo lại các bảng với cấu trúc mới
         onCreate(db);
@@ -151,7 +161,7 @@ public class DBHelper extends SQLiteOpenHelper {
                 String phone = cursor.getString(phoneIndex);
                 String address = cursor.getString(addressIndex);
 
-                customer = new Customers(user, pass, name, phone, address);
+                customer = new Customers(customer.getId_customer(), user, pass, name, phone, address);
             }
 
             cursor.close();
@@ -176,10 +186,48 @@ public class DBHelper extends SQLiteOpenHelper {
                 String phone = cursor.getString(phoneIndex);
                 String address = cursor.getString(addressIndex);
 
-                hotel = new Hotels(user, pass, name, phone, address);
+                hotel = new Hotels(hotel.getId_hotel(), user, pass, name, phone, address);
             }
             cursor.close();
         }
         return hotel;
     }
+
+    // add room
+    public boolean checkInsertRoom(String id, String name, String price, int numpeople, int status, int hotelid){
+        SQLiteDatabase db = this.getReadableDatabase();
+
+        // Kiểm tra xem khách sạn có tồn tại không
+        String hotelQuery = "SELECT * FROM hotels WHERE id_hotel = ?";
+        Cursor hotelCursor = db.rawQuery(hotelQuery, new String[]{String.valueOf(hotelid)});
+        if (hotelCursor.getCount() <= 0) {
+            hotelCursor.close();
+            db.close();
+            return false; // Khách sạn không tồn tại, không thêm được phòng
+        }
+        hotelCursor.close();
+
+        // Kiểm tra xem phòng đã tồn tại trong khách sạn hay chưa
+        String roomQuery = "SELECT * FROM rooms WHERE room_name = ? AND id_hotel = ?";
+        Cursor roomCursor = db.rawQuery(roomQuery, new String[]{name, String.valueOf(hotelid)});
+
+        if (roomCursor.getCount() > 0) {
+            roomCursor.close();
+            db.close();
+            return false; // Phòng đã tồn tại trong khách sạn, không thêm được
+        }
+        roomCursor.close();
+
+        ContentValues values = new ContentValues();
+        values.put("room_name", name);
+        values.put("room_price", price);
+        values.put("room_number", numpeople);
+        values.put("room_status", status);
+        values.put("id_hotel", hotelid);
+        long result = db.insert("rooms", null, values);
+        db.close();
+
+        return result != -1; // Kiểm tra xem phòng đã được thêm thành công hay không
+    }
+
 }

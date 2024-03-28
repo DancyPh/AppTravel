@@ -1,4 +1,4 @@
-package com.example.travelhotel;
+package com.example.travelhotel.Customer;
 
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -6,6 +6,8 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import androidx.fragment.app.Fragment;
+
+import com.example.travelhotel.R;
 
 public class HomeTabFragment extends Fragment {
     @Override

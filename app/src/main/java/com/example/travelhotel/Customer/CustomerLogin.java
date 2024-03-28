@@ -1,8 +1,6 @@
 package com.example.travelhotel.Customer;
 
 import android.os.Bundle;
-import android.widget.Button;
-import android.widget.EditText;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.FragmentStatePagerAdapter;
@@ -17,16 +15,10 @@ public class CustomerLogin extends AppCompatActivity {
     private TabLayout tablayout;
     private ViewPager viewpager;
 
-    EditText txtusernamelogin_customer, usernamepassword_customer;
-    Button btnlogin_customer;
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_customer_login);
-
-        // anh xa
-
 
 
         // set layout login signup
