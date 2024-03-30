@@ -1,12 +1,17 @@
 package com.example.travelhotel.Hotel;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
+import android.widget.EditText;
+import android.widget.Toast;
 
 import androidx.fragment.app.Fragment;
 
+import com.example.travelhotel.DB.DBHelper;
 import com.example.travelhotel.R;
 
 /**
@@ -25,6 +30,8 @@ public class HotelLoginFragment extends Fragment {
     private String mParam1;
     private String mParam2;
 
+    private EditText edtusernamelogin_hotel, edtpasswordlogin_hotel;
+    private Button btnlogin_hotel;
     public HotelLoginFragment() {
         // Required empty public constructor
     }
@@ -60,6 +67,27 @@ public class HotelLoginFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View view =  inflater.inflate(R.layout.fragment_hotel_login, container, false);
+
+        edtusernamelogin_hotel = view.findViewById(R.id.edtUsernameLogin_hotel);
+        edtpasswordlogin_hotel = view.findViewById(R.id.edtPasswordLogin_hotel);
+        btnlogin_hotel = view.findViewById(R.id.btnLogin_hotel);
+
+        btnlogin_hotel.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                String user = edtusernamelogin_hotel.getText().toString();
+                String pass = edtpasswordlogin_hotel.getText().toString();
+
+                DBHelper dbHelper = new DBHelper(getActivity());
+                if (user.isEmpty() || pass.isEmpty()){
+                    Toast.makeText(getActivity(), "not null", Toast.LENGTH_SHORT).show();
+                } else if (dbHelper.checkLogin(user,pass)){
+                    Intent intent = new Intent(getActivity(), HotelHome.class);
+                    startActivity(intent);
+                }
+            }
+        });
+
         return view;
     }
 }

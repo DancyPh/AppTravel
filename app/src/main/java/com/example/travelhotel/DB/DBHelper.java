@@ -145,6 +145,8 @@ public class DBHelper extends SQLiteOpenHelper {
         else return false;
     }
 
+
+
     // get customer
     public Customers getCustomer(String user, String pass){
         SQLiteDatabase db = this.getReadableDatabase();

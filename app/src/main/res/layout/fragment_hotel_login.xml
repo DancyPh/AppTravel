@@ -32,7 +32,7 @@
         app:layout_constraintVertical_bias="0" />
 
     <Button
-        android:id="@+id/btnLogin_customer"
+        android:id="@+id/btnLogin_hotel"
         android:layout_width="306dp"
         android:layout_height="wrap_content"
         android:text="Login"
