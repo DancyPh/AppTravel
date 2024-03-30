@@ -6,4 +6,13 @@
     </style>
 
     <style name="Theme.TravelHotel" parent="Base.Theme.TravelHotel" />
+
+    <style name="Theme.TravelHotel.NoActionBar">
+        <item name="windowActionBar">false</item>
+        <item name="windowNoTitle">true</item>
+    </style>
+
+    <style name="Theme.TravelHotel.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar" />
+
+    <style name="Theme.TravelHotel.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
 </resources>
