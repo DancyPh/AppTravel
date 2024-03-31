@@ -85,7 +85,7 @@ public class HotelSignupFragment extends Fragment {
 
                 if (user.isEmpty() || pass.isEmpty() || confirm.isEmpty()){
                     Toast.makeText(getActivity(), "Not null", Toast.LENGTH_SHORT).show();
-                } else if (!user.equals(confirm)) {
+                } else if (!pass.equals(confirm)) {
                     Toast.makeText(getActivity(), "Password and Confirm password not equals", Toast.LENGTH_SHORT).show();
                 } else {
                     DBHelper dbHelper = new DBHelper(getActivity());

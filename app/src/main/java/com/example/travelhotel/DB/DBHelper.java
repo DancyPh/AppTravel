@@ -140,8 +140,15 @@ public class DBHelper extends SQLiteOpenHelper {
     public boolean checkLogin (String username, String password){
         SQLiteDatabase db = this.getReadableDatabase();
         Cursor cursorCustomer = db.rawQuery("select * from customers where username_customer = ? and password_customer = ?", new String[]{username, password});
-        Cursor cursorHotel = db.rawQuery("select * from hotels where username_hotel = ? and password_hotel = ?", new String[]{username, password});
-        if(cursorCustomer.getCount() > 0 || cursorHotel.getCount() > 0) return true;
+
+        if(cursorCustomer.getCount() > 0) return true;
+        else return false;
+    }
+
+    public boolean checkLoginHotel(String user, String pass){
+        SQLiteDatabase db = this.getReadableDatabase();
+        Cursor cursorHotel = db.rawQuery("select * from hotels where username_hotel = ? and password_hotel = ?", new String[]{user, pass});
+        if (cursorHotel.getCount() > 0) return true;
         else return false;
     }
 

@@ -12,7 +12,6 @@ import android.widget.Toast;
 import androidx.fragment.app.Fragment;
 
 import com.example.travelhotel.DB.DBHelper;
-import com.example.travelhotel.DB.Hotels;
 import com.example.travelhotel.R;
 
 /**
@@ -82,9 +81,9 @@ public class HotelLoginFragment extends Fragment {
                 DBHelper dbHelper = new DBHelper(getActivity());
                 if (user.isEmpty() || pass.isEmpty()){
                     Toast.makeText(getActivity(), "not null", Toast.LENGTH_SHORT).show();
-                } else if (dbHelper.checkLogin(user,pass)){
-                    Hotels hotel = dbHelper.getHotel(user, pass);
-                    Intent intent = new Intent(getActivity(), HomeHotel.class);
+                } else if (dbHelper.checkLoginHotel(user,pass)){
+                    //Hotels hotel = dbHelper.getHotel(user, pass);
+                    Intent intent = new Intent(getActivity(), HotelHome.class);
                     startActivity(intent);
                 }
             }

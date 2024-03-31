@@ -68,7 +68,7 @@ public class SignupFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        View view = inflater.inflate(R.layout.fragment_signup, container, false);
+        View view = inflater.inflate(R.layout.fragment_signup_customer, container, false);
 
         // anh xa
         edtusernamesignup_customer = view.findViewById(R.id.edtUsernameSignup_customer);
