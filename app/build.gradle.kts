@@ -9,7 +9,7 @@ android {
     defaultConfig {
         applicationId = "com.example.travelhotel"
         minSdk = 26
-        targetSdk = 34
+        this.targetSdk = 33
         versionCode = 1
         versionName = "1.0"
 
