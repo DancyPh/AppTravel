@@ -12,7 +12,10 @@ import android.widget.Toast;
 import androidx.fragment.app.Fragment;
 
 import com.example.travelhotel.DB.DBHelper;
+import com.example.travelhotel.DB.Hotels;
 import com.example.travelhotel.R;
+
+import java.util.ArrayList;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -32,6 +35,8 @@ public class HotelLoginFragment extends Fragment {
 
     private EditText edtusernamelogin_hotel, edtpasswordlogin_hotel;
     private Button btnlogin_hotel;
+
+    public ArrayList<Hotels> hotelInforList;
     public HotelLoginFragment() {
         // Required empty public constructor
     }
@@ -68,6 +73,8 @@ public class HotelLoginFragment extends Fragment {
                              Bundle savedInstanceState) {
         View view =  inflater.inflate(R.layout.fragment_hotel_login, container, false);
 
+        hotelInforList = new ArrayList<>();
+
         edtusernamelogin_hotel = view.findViewById(R.id.edtUsernameLogin_hotel);
         edtpasswordlogin_hotel = view.findViewById(R.id.edtPasswordLogin_hotel);
         btnlogin_hotel = view.findViewById(R.id.btnLogin_hotel);
@@ -82,8 +89,12 @@ public class HotelLoginFragment extends Fragment {
                 if (user.isEmpty() || pass.isEmpty()){
                     Toast.makeText(getActivity(), "not null", Toast.LENGTH_SHORT).show();
                 } else if (dbHelper.checkLoginHotel(user,pass)){
-                    //Hotels hotel = dbHelper.getHotel(user, pass);
+                    Hotels hotel = dbHelper.getHotelById(user, pass);
+                    if (hotel != null) hotelInforList.add(hotel); // kiểm tra có thông tin khách sạn hay không
+
+                    // chuyển hướng sang
                     Intent intent = new Intent(getActivity(), HotelHome.class);
+                    intent.putExtra("hotelInfor", hotel); // lưu thông tin của khachs sạn
                     startActivity(intent);
                 }
             }

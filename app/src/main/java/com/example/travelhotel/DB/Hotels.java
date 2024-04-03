@@ -1,7 +1,9 @@
 package com.example.travelhotel.DB;
 
-public class Hotels {
+import android.os.Parcel;
+import android.os.Parcelable;
 
+public class Hotels implements Parcelable {
 
     private int id_hotel;
     private String username_hotel;
@@ -18,6 +20,27 @@ public class Hotels {
         this.phone_hotel = phone_hotel;
         this.address_hotel = address_hotel;
     }
+
+    protected Hotels(Parcel in) {
+        id_hotel = in.readInt();
+        username_hotel = in.readString();
+        password_hotel = in.readString();
+        name_hotel = in.readString();
+        phone_hotel = in.readString();
+        address_hotel = in.readString();
+    }
+
+    public static final Parcelable.Creator<Hotels> CREATOR = new Parcelable.Creator<Hotels>() {
+        @Override
+        public Hotels createFromParcel(Parcel in) {
+            return new Hotels(in);
+        }
+
+        @Override
+        public Hotels[] newArray(int size) {
+            return new Hotels[size];
+        }
+    };
 
     public int getId_hotel() {
         return id_hotel;
@@ -64,5 +87,20 @@ public class Hotels {
 
     public void setAddress_hotel(String address_hotel) {
         this.address_hotel = address_hotel;
+    }
+
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+
+    @Override
+    public void writeToParcel(Parcel dest, int flags) {
+        dest.writeInt(id_hotel);
+        dest.writeString(username_hotel);
+        dest.writeString(password_hotel);
+        dest.writeString(name_hotel);
+        dest.writeString(phone_hotel);
+        dest.writeString(address_hotel);
     }
 }

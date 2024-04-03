@@ -28,5 +28,7 @@ public class HotelLogin extends AppCompatActivity {
 
         viewpager_hotel.setAdapter(hotelLoginAdapter);
         tablelayout_hotel.setupWithViewPager(viewpager_hotel);
+
+
     }
 }

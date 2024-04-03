@@ -185,21 +185,41 @@ public class DBHelper extends SQLiteOpenHelper {
         Hotels hotel = null;
         Cursor cursor = db.query("hotels", new String[]{"username_hotel", "password_hotel", "name_hotel", "phone_hotel", "address_hotel"},
                 "username_hotel = ? and password_hotel = ?", new String[]{user, pass}, null, null, null);
-        if (cursor != null & cursor.moveToFirst()){
+        if (cursor != null && cursor.moveToFirst()){
             int nameIndex = cursor.getColumnIndex("name_hotel");
             int phoneIndex = cursor.getColumnIndex("phone_hotel");
             int addressIndex = cursor.getColumnIndex("address_hotel");
 
-            if (nameIndex != -1 && phoneIndex != -1 && addressIndex != -1){
+            //if (nameIndex != -1 && phoneIndex != -1 && addressIndex != -1){
                 String name = cursor.getString(nameIndex);
                 String phone = cursor.getString(phoneIndex);
                 String address = cursor.getString(addressIndex);
 
                 hotel = new Hotels(hotel.getId_hotel(), user, pass, name, phone, address);
-            }
+            //}  
             cursor.close();
         }
         return hotel;
+    }
+
+    public Hotels getHotelById(String user, String pass){
+        SQLiteDatabase db = this.getReadableDatabase();
+        Hotels idhotel = null;
+        Cursor cursor = db.query("hotels", new String[]{"id_hotel", "username_hotel", "password_hotel"},
+                "username_hotel = ? and password_hotel = ?", new String[]{user, pass}, null, null, null);
+        if (cursor != null && cursor.moveToFirst()){
+            // Lấy các giá trị từ Cursor
+            int idIndex = cursor.getColumnIndex("id_hotel");
+            int usernameIndex = cursor.getColumnIndex("username_hotel");
+            int passwordIndex = cursor.getColumnIndex("password_hotel");
+
+            // Tạo một đối tượng Hotels từ dữ liệu Cursor
+            int id = cursor.getInt(idIndex);
+            String username = cursor.getString(usernameIndex);
+            String password = cursor.getString(passwordIndex);
+            idhotel = new Hotels(id, username, password, null, null, null);
+        }
+        return idhotel;
     }
 
     // add room

@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        tools:context=".Hotel.HotelManagerment" >
+
+        <Spinner
+            android:id="@+id/spinner_list_managerment"
+            android:layout_width="match_parent"
+            android:layout_height="48dp"
+            android:layout_centerInParent="true"
+            android:layout_marginTop="50dp"/>
+
+        <FrameLayout
+            android:id="@+id/fm_list_managerment_suport"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/spinner_list_managerment"/>
+        
+    </LinearLayout>
